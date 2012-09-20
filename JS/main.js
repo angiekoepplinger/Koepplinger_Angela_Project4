@@ -1,7 +1,7 @@
 //Angela Koepplinger
 //Visual Frameworks: Term 1209
-// Project 3: Web App Part 3
-//Date: 09/14/12
+// Project 4: Web App Part 4
+//Date: 09/19/12
 
 
 //Wait until the DOM is ready.
@@ -111,7 +111,8 @@ window.addEventListener("DOMContentLoaded", function(){
 	function getData(){
 		toggleControls("on");
 		if(localStorage.length ===0){
-			alert("There is no data in Local Storage.");
+			alert("There is no data in Local Storage, default data was added.");
+			autoFillData();
 		};
 		//Write Data from Local Storage to the browser.
 		var makeDiv = document.createElement("div");
@@ -129,6 +130,7 @@ window.addEventListener("DOMContentLoaded", function(){
 				var object = JSON.parse(value);												//convert string from local storage back into an object using JSON.parse!
 				var makeSubUl = document.createElement("ul");
 				makeli.appendChild(makeSubUl);
+				getImage(object.purchaseType[1], makeSubUl);
 				for(var x in object){														//example: for "item.purchaseType"(key) in the object
 					var makeSubli = document.createElement("li");
 					makeSubUl.appendChild(makeSubli);
@@ -138,12 +140,32 @@ window.addEventListener("DOMContentLoaded", function(){
 					makeSubli.innerHTML = objSubText;	
 					makeSubUl.appendChild(linksLi);	//NEW  edit link & delete link
 				};
+			makeItemLinks(localStorage.key(i), linksLi);	//Create our edit and delete buttons/link for each item in local storage.
 			};
-			makeItemLinks(localStorage.key(i), linksLi);	//Create our edit and delete buttons/link for each item in local storage.	
+					
 		};
 		document.body.appendChild(makeDiv);
 	};
 
+	//Get the image for the right category
+	function getImage(catName, makeSubUl){
+		var imageLi = document.createElement("li");
+		makeSubUl.appendChild(imageLi);
+		var newImg = document.createElement("img");
+		var setSrc = newImg.setAttribute("src", "images/"+ catName +".png");
+		imageLi.appendChild(newImg);
+	};
+
+
+	//Auto Populate Local Storage
+	function autoFillData(){
+		//The actual JSON OBJECT data required for this to work is coming from our json.js file, which is loaded from our HTML file
+		//Store the JSON OBJECT into local storage
+		for(var x in json){
+			var id = Math.floor(Math.random()*100000001);
+			localStorage.setItem(id, JSON.stringify(json[x]));
+		};
+	};
 	
 	//Make Item Links
 	//Create the edit and delete links for each stored item when displayed.
@@ -261,33 +283,33 @@ window.addEventListener("DOMContentLoaded", function(){
 		var messageArray = [];
 		//Group Validation
 		if(getPurchaseList.value === "--Select A Type--"){
-			var purchaseListError = "Please choose a Purchase Type.";
+			var purchaseListError = "Please choose a Purchase Type!";
 			getPurchaseList.style.border = "1px solid red";
 			messageArray.push(purchaseListError);
 		};
 		if(getItemList.value === "--Select A Type--"){
-			var itemListError = "Please choose an Item Type.";
+			var itemListError = "Please choose an Item Type!";
 			getItemList.style.border = "1px solid red";
 			messageArray.push(itemListError);
 		};
 
 		//Work Order Validation
 		if(getWorkOrder.value ==="") {
-			var workOrderError = "Please enter Work Order.";
+			var workOrderError = "Please enter Work Order!";
 			getWorkOrder.style.border = "1px solid red";
 			messageArray.push(workOrderError);
 		};
 
 		//Support Site Validation
 		if(getSupportSite.value ==="") {
-			var supportSiteError = "Please enter Support Site.";
+			var supportSiteError = "Please enter Support Site!";
 			getSupportSite.style.border = "1px solid red";
 			messageArray.push(supportSiteError);
 		};
 
 		//Date Required Validation
 		if(getDateRequired.value ==="") {
-			var dateRequiredError = "Please enter Date Required.";
+			var dateRequiredError = "Please enter Date Required!";
 			getDateRequired.style.border = "1px solid red";
 			messageArray.push(dateRequiredError);
 		};

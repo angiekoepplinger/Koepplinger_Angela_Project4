@@ -1,7 +1,7 @@
 /* 
 Angela Koepplinger
 Visual Frameworks: Term 1209
-Date: 09/14/12
+Date: 09/19/12
 CSS- additems.html
 */
 
@@ -98,6 +98,15 @@ textarea{
 	font-size: .8em;
 }
 div#items{
-	margin-left: 20px;
+	width: 310px;
+	margin: 0 5px 0 5px;
+	font-size: .8em;
 }
+div#items ul li ul{
+	border: 2px solid gray;
+	background-color: #E3E7E8;
+	margin-bottom: 10px;
+}
+
+
 
