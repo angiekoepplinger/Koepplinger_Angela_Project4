@@ -107,6 +107,22 @@ div#items ul li ul{
 	background-color: #E3E7E8;
 	margin-bottom: 10px;
 }
-
+body#indexPage{
+	background-color: #E3E7E8;
+}
+div#container2{
+	text-align:center;
+}
+hgroup h1{
+	font-size: 1.5em;
+}
+hgroup p{
+	font-size: 1em;
+	margin: 0;
+	color: #386A80;
+}
+html body a#addTask{
+	text-decoration: none;
+}
 
 
